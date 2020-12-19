@@ -13,6 +13,24 @@ class TaskController{
             console.log(error)
         })
     }
+    listaMorador(request,response){
+        database.select("*").table("tb_morador").then(morador =>{
+            console.log(morador)
+            response.json(morador)
+    }).catch(error =>{
+        console.log(error)
+    })
+    }
+    listarUmMorador(request,response){
+        const id_morador = request.params
+        console.log(id_morador.id_morador)
+
+        database.select('*').table("tb_morador").where({id_morador:id_morador.id_morador}).then(morador=>{
+            response.json(morador)
+            }).catch(error =>{
+                console.log(error)
+            })
+    }
 }
 
 module.exports = new TaskController()
